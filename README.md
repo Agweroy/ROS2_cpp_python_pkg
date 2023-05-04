@@ -145,13 +145,29 @@ That's all for package.xml.
  
 we can split this into 3 parts which are: Dependencies, C++ part and python part
 
- 
+first we add the dependencies for both C++ and python as shown below.
+  
     #find dependencies
     find_package(ament_cmake REQUIRED)
     find_package(ament_cmake_python REQUIRED)
     find_package(rclcpp REQUIRED)
     find_package(rclpy REQUIRED)
-       
+    
+Next we work on the C++ part.
+
+First we include the "include" directory so the cpp_header.hpp file can be found.
+Then we create a C++ executable as usual and install it in lib/ folder of the package(inside the install/ folder of your ROS2 workspace)
+    
+   
+    #C++ executable installation.
+    include_directories(include)
+
+    add_executable(cpp_exec src/cpp_node.cpp)
+    ament_target_dependencies(cpp_exec rclcpp)
+
+    install(TARGETS
+    cpp_exec
+    DESTINATION lib/${PROJECT_NAME})
 
 
 
