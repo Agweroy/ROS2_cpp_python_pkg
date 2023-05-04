@@ -1,4 +1,4 @@
-**HOW TO CREATE A PACKAGE FOR BOTH C++ AND PYTHON NODES**
+ # HOW TO CREATE A PACKAGE FOR BOTH C++ AND PYTHON NODES
 
 Unlike ros1 packages which can contain both ```C++``` and ```python``` nodes by default, ros2 packages have to be assigned a ```C++```or python build type during the package creation.
 In ros2, when you start to create a package, you have to specify if the package is going to be a C++ package or a Python package with either ament_cmake(for ```C++```) or ```ament_python```(for a python package).
@@ -142,12 +142,15 @@ We add a dependency for the ROS2 C++ library (rclcpp) as well as the ROS2 python
 That's all for package.xml.
 
 ***2.2 Editing the CMakeLists.txt file***
-
-Here's the complete CMakeLists.txt to install both C++ and python nodes. 
+ 
 we can split this into 3 parts which are: Dependencies, C++ part and python part
 
  
-
+    #find dependencies
+    find_package(ament_cmake REQUIRED)
+    find_package(ament_cmake_python REQUIRED)
+    find_package(rclcpp REQUIRED)
+    find_package(rclpy REQUIRED)
        
 
 
