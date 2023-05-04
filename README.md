@@ -1,4 +1,4 @@
-Create a ROS2 package for both python and cpp nodes
+HOW TO CREATE A PACKAGE FOR BOTH C++ AND PYTHON NODES
 
 
 Unlike ros1 packages which can contain both C++ and python nodes by default, ros2 packages have to be assigned a C++ or python build type during the package creation.
@@ -87,7 +87,7 @@ don't forget to add the shebang line in your python_node.py. usually the first l
 
         #!/usr/bin/env python3
 
-This is something you don't have to do in a standared ros2 python package since it is already managed for you but with this modification, if you don't add this line, you'll get an error notification when you try to start the node with ros2 run or from a launch file. 
+This is something you don't have to do in a standared ros2 python package since it is already managed for you but with this modification, if you don't add this line, you'll get an error notification when you try to start the node with ```ros2 run``` or from a launch file. 
     
 if you want to be able to modify your code and re-run it without recompilling every time, or if you want to start your node by launching your script directly, then make the scripts executable
 
@@ -136,7 +136,8 @@ in a standard python package, you'd have ament_python, not ament_cmake_python. M
 
               <depend>rclpy</depend>
               <depend>rclcpp</depend>
-We add a dependency for the ROS2 Cpp library (rclcpp) as well as the ROS2 python library(rclpy)
+              
+We add a dependency for the ROS2 C++ library (rclcpp) as well as the ROS2 python library(rclpy)
 
 That's all for package.xml.
 
