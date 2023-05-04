@@ -1,8 +1,7 @@
-HOW TO CREATE A PACKAGE FOR BOTH C++ AND PYTHON NODES
+**HOW TO CREATE A PACKAGE FOR BOTH C++ AND PYTHON NODES**
 
-
-Unlike ros1 packages which can contain both C++ and python nodes by default, ros2 packages have to be assigned a C++ or python build type during the package creation.
-In ros2, when you start to create a package, you have to specify if the package is going to be a C++ package or a Python package with either ament_cmake(for C++) or ament_python(for a python package).
+Unlike ros1 packages which can contain both ```C++``` and ```python``` nodes by default, ros2 packages have to be assigned a ```C++```or python build type during the package creation.
+In ros2, when you start to create a package, you have to specify if the package is going to be a C++ package or a Python package with either ament_cmake(for ```C++```) or ```ament_python```(for a python package).
 ament_cmake and ament_python are called build types and will tell ros2 if your package is a C++ or python.
 
 
@@ -11,16 +10,16 @@ the answer is YES!!!! the steps bellow shows how to create a ros2 combined packa
 
 You first have to learn how to create a standard ros2 C++ and python package.
 
-TABLE OF CONTENT
+**TABLE OF CONTENT**
     
 
-1. Create a standard C++ package.
+**1. CREATE A STANDARD C++ AND PYTHON PACKAGE**
 
       1.1 Add a C++ node and a header file.
       1.2 Add a python node and a module to import file
       1.3 ros2 package architecture with both python and C++ nodes.
 
-2. Configure your ros2 package for both C++ and python 
+**2. CONFIGORE YOUR ROS2 PACKAGE FOR BOTH C++ AND PYTHON**
         
       2.1 Package.xml edition
       2.2 CMakeList.txt
@@ -28,7 +27,7 @@ TABLE OF CONTENT
 
 
 
-FIRST WE CREATE A STANDARD C++ PACKAGE.
+**1. First we create a standard C++ and python package.**
 
 First create the package with the ament_cmake build type.
 you can name the package say "cpp_python_pkg"
@@ -52,7 +51,7 @@ For now the package architecture looks like this:
 
 this is the base for a basic C++ package and from here will will add necessary files and configuration for python.
 
-ADD A CPP NODE AND HEADER FILE.
+***1.1 We add the C++ (`.cpp`) file and the `.hpp` header file***
 
 let's add a .cpp and file in the src/ directory, and a .hpp header file in the include/cpp_python_pkg/ directory. No need to create new folders here.
 
@@ -63,7 +62,7 @@ let's add a .cpp and file in the src/ directory, and a .hpp header file in the i
 you have to  include the cpp_header.hpp if your cpp_node.cpp file needs it #include "cpp_python_pkg/cpp_header.hpp"
 
     
-ADD THE PYTHON AND IMPORT MODULE
+***1.2 Adding the python node file and import module file***
 
 let's setup the package so it can also have python nodes.
 
@@ -96,9 +95,9 @@ Note: if you want to import the module_to_import.py file from your python_node.p
 
         from cpp_python_pkg.module_to_import import....
 
-THE FINAL ROS2 PACKAGE ARCHITECTURE IS AS SHOWN BELOW
+***1.3 The final ros2 package tree is as shown below***
 
-After all the modifications, your package tree should look like this.
+   After all the modifications, your package tree should look like this.
        
                               └── cpp_python_pkg
                                   ├── CMakeLists.txt 
@@ -117,7 +116,9 @@ After all the modifications, your package tree should look like this.
 The CMakeList.txt and package.xml will be used for both  C++ and python nodes. For the rest, you can see the C++ stuff is clearly separated from python stuff.
 
 
-CONFIGURING YOUR ROS2 PACKAGE FOR BOTH C++ AND PYTHON 
+**2.0CONFIGURING YOUR ROS2 PACKAGE FOR BOTH C++ AND PYTHON(`package.xml` and `CMakeList.txt`)**
+
+***2.1 Editing the package.eml file***
 
 Now from you terminal navigate to your package folder 
 
@@ -128,10 +129,9 @@ you'll see a bunch of files including package.xml and CMakeList.txt. open packag
           
               <buildtool_depend>ament_cmake</buildtool_depend>
               <buildtool_depend>ament_cmake_python</buildtool_depend>
+              
 by default you should already have a buildtool_depend for ament_cmake since that was asked when creating our standard C++ package from the command line.
-
 here we add another buildtool_depend tag: ament_cmake_python.
-
 in a standard python package, you'd have ament_python, not ament_cmake_python. Make sure not to mix up those two. Using amen_cmake_python means that we will be able to setup our python stuff with cmake, so from the CMakeList.txt file.
 
               <depend>rclpy</depend>
@@ -141,10 +141,9 @@ We add a dependency for the ROS2 C++ library (rclcpp) as well as the ROS2 python
 
 That's all for package.xml.
 
-CMakeLists.txt
+***2.2 Editing the CMakeLists.txt file***
 
 Here's the complete CMakeLists.txt to install both C++ and python nodes. 
-
 we can split this into 3 parts which are: Dependencies, C++ part and python part
 
  
