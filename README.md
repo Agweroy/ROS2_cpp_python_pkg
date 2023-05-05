@@ -118,7 +118,7 @@ The CMakeList.txt and package.xml will be used for both  C++ and python nodes. F
 
 **2.0CONFIGURING YOUR ROS2 PACKAGE FOR BOTH C++ AND PYTHON(`package.xml` and `CMakeList.txt`)**
 
-***2.1 Editing the package.eml file***
+***2.1 Editing the package.xml file***
 
 Now from you terminal navigate to your package folder 
 
